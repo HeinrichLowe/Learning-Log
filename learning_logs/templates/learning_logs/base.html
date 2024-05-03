@@ -11,6 +11,7 @@
         <span> - </span>
         <a href="{% url 'topics' %}">Tópicos</a> -
         {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Sair</a> |
             Olá, {{ user.username }}
         {% else %}
             <a href="{% url 'login' %}">Entrar</a>
