@@ -1,5 +1,29 @@
 {% extends "learning_logs/base.html" %}
 
+{% block header %}
+    <div class="mb-2 p-5 bg-body-tertiary rounded-3">
+        <h1 class="display-4 fw-semibold">Acompanhe seu apredizado.</h1>
+    </div>
+{% endblock header %}
+
 {% block content %}
-    <p>Essa aplicação te ajudará a organizar seus estudos.</p>
+    
+    {% if user.is_authenticated %}
+
+        <h5>
+            Sempre que você aprender algo novo sobre um tópico, faça uma entrada resumindo o que você aprendeu.
+        </h5>
+
+    {% else %}
+
+        <h5>
+            <a href="{% url 'register' %}" class="link-primary link-offset-1">Crie uma conta</a> para utilizar o Learning Log e liste os tópicos que vocês está aprendendo.
+        </h5>
+
+        <br>
+
+        <h5>
+            Sempre que você aprender algo novo sobre um tópico, faça uma entrada resumindo o que você aprendeu.
+        </h5>
+    {% endif %}
 {% endblock content %}

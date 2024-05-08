@@ -1,27 +1,79 @@
+{% load django_bootstrap5 %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <meta name="description" content="Aplicação para anotações">
+    <meta name="keywords" content="anotações, anotação">
+    <meta name="author" content="Alguém ai!?">
+    <meta http-equiv="X-UA-Compatile" content="IE=edge">
+    <title>Learning Log</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
-    <p>
-        <a href="{% url 'index' %}">Learning Log</a>
-        <span> - </span>
-        <a href="{% url 'topics' %}">Tópicos</a> -
-        {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Sair</a> |
-            Olá, {{ user.username }}
-        {% else %}
-            <a href="{% url 'login' %}">Entrar</a> -
-            <a href="{% url 'register' %}">Registrar</a>
-        {% endif %}
-    </p>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <div>
+                <button 
+                    type="button" 
+                    class="navbar-toggler" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarMenu" 
+                    aria-controls="navbarSupportedContent" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'index' %}">Learning Log</a>
+            </div>
+    
+            <div id="navbarMenu" class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a href="{% url 'topics' %}" class="nav-link">
+                            Tópicos
+                        </a>
+                    </li>
+                </ul>
+        
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a class="nav-item nav-link">Olá, <span class="fw-bold">{{ user.username }}</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'logout' %}" class="nav-item nav-link">Sair</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="{% url 'login' %}" class="nav-item nav-link">Entrar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'register' %}" class="nav-link">Registrar</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    {% block content %}{% endblock content %}
+    <div class="container my-5">
+        <div class="mb-3 pb-3 border-bottom">
+            {% block header %}{% endblock header %}
+        </div>
+        <div>
+            {% block content %}{% endblock content %}
+        </div>
+    </div>
 </body>
 <footer>
-    Rodapé
+    <div class="container">
+        Rodapé
+    </div>
 </footer>
 </html>
