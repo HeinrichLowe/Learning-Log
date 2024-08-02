@@ -2,7 +2,9 @@
 {% load django_bootstrap5 %}
 
 {% block header %}
+
     <h2 class="text-center">Entre com o seu login.</h2>
+    
 {% endblock header %}
 
 {% block content %}
@@ -10,11 +12,12 @@
     <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
         <form action="{% url 'login' %}" method="POST" class="form">
             {% csrf_token %}
-            {% bootstrap_form form %}
+            {% bootstrap_form form error_css_class='' success_css_class='' %}
     
             <div class="text-center">
                 <button name="submit" class="btn btn-primary col-6">Entrar</button>
             </div>
+
             <input type="hidden" name="next" value="{% url 'index' %}" />
         </form>
     </div>

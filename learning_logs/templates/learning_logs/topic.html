@@ -6,13 +6,13 @@
 
 {% block content %}
 
-    <p>
+    <div class="mb-3">
         <a href="{% url 'new_entry' topic.id %} " class="btn btn-primary">Adicione uma nova anotação</a>
-    </p>
+    </div>
 
     {% for entry in entries %}
         <div class="card mb-3">
-            <div class="card-header d-flex">
+            <div class="card-header d-flex align-items-center">
                 <h5 class="me-auto">{{ entry.date_added | date:'M d, Y H:i' }}</h5>
                 <a href="{% url 'edit_entry' entry.id %}" class="btn btn-secondary">Editar anotação</a>
             </div>

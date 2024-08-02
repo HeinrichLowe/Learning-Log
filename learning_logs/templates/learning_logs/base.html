@@ -14,66 +14,69 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <div>
-                <button 
-                    type="button" 
-                    class="navbar-toggler" 
-                    data-bs-toggle="collapse" 
-                    data-bs-target="#navbarMenu" 
-                    aria-controls="navbarSupportedContent" 
-                    aria-expanded="false" 
-                    aria-label="Toggle navigation"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand" href="{% url 'index' %}">Learning Log</a>
-            </div>
-    
-            <div id="navbarMenu" class="collapse navbar-collapse">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a href="{% url 'topics' %}" class="nav-link">
-                            Tópicos
-                        </a>
-                    </li>
-                </ul>
+<body class="d-flex flex-column" style="height: 100vh;">
+    <div class="flex-fill">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container">
+                <div>
+                    <button 
+                        type="button" 
+                        class="navbar-toggler" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#navbarMenu" 
+                        aria-controls="navbarSupportedContent" 
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'index' %}">Learning Log</a>
+                </div>
         
-                <ul class="navbar-nav">
-                    {% if user.is_authenticated %}
-                        <li>
-                            <a class="nav-item nav-link">Olá, <span class="fw-bold">{{ user.username }}</span></a>
-                        </li>
-                        <li>
-                            <a href="{% url 'logout' %}" class="nav-item nav-link">Sair</a>
-                        </li>
-                    {% else %}
+                <div id="navbarMenu" class="collapse navbar-collapse">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a href="{% url 'login' %}" class="nav-item nav-link">Entrar</a>
+                            <a href="{% url 'topics' %}" class="nav-link">
+                                Tópicos
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{% url 'register' %}" class="nav-link">Registrar</a>
-                        </li>
-                    {% endif %}
-                </ul>
+                    </ul>
+            
+                    <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a class="nav-item nav-link">Olá, <span class="fw-bold">{{ user.username }}</span></a>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}" class="nav-item nav-link">Sair</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'login' %}" class="nav-item nav-link">Entrar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'register' %}" class="nav-link">Registrar</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    
+        <main class="container my-5">
+            <div class="mb-3 pb-3 border-bottom">
+                {% block header %}{% endblock header %}
+            </div>
+            <div>
+                {% block content %}{% endblock content %}
+            </div>
+        </main>
+    </div>
 
-    <div class="container my-5">
-        <div class="mb-3 pb-3 border-bottom">
-            {% block header %}{% endblock header %}
+    <footer class="bg-body-secondary py-2">
+        <div class="container text-center text-secondary-emphasis fw-medium">
+            Created by: Heinrich Löwe - 2024
         </div>
-        <div>
-            {% block content %}{% endblock content %}
-        </div>
-    </div>
+    </footer>
 </body>
-<footer>
-    <div class="container">
-        Rodapé
-    </div>
-</footer>
 </html>
