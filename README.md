@@ -39,7 +39,7 @@ python3 manage.py createsuperuser
 6- Finally, run the server:
 
 ```bash
-python manage.py runserver
+python3 manage.py runserver
 ```
 
 The server will be started at [http://localhost:8000](http://localhost:8000).
